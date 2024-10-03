@@ -1,0 +1,66 @@
+h1 {
+    text-align: center;
+}
+
+.wordblock {
+    border-radius: 5px;
+    background-color: #f7f5e3;
+    border-color: black;
+    margin: 10px 10px;
+    height: 10vh;
+    width: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.attemptblock {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+}
+
+#attemptboard {
+    margin: 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.keyboard{
+    margin: 20px;
+    justify-content: center;
+}
+
+.keyrow{
+    display: flex;
+    flex-direction: row;
+}
+
+.key{
+    background-color: #a6a6a6;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 5vw;
+    cursor: pointer;
+    margin: 5px 10px;
+}
+
+.hitbox{
+    background-color: lightgreen;
+}
+
+.presentbox{
+    background-color: yellow;
+}
+
+.missbox{
+    background-color: gray;
+}
