@@ -93,10 +93,8 @@ function checkanswer(){
         return
     }
 
-    let has = WORDS.includes(guess)
-    console.log(has)
-    
-    if (WORDS.includes(guess)){
+
+    if (!WORDS.includes(guess)){
         alert("The word not include in the list or not a word")
         return
     }
