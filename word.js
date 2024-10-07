@@ -11,5 +11,10 @@ export const WORDS = [
     'ultra', 'vivid', 'whale', 'xenon', 'yacht', 'zesty', 'bacon', 'chess', 'doubt', 'eagle',
     'fable', 'globe', 'house', 'input', 'jolly', 'kiosk', 'lemon', 'mirth', 'ninja', 'oasis',
     'penny', 'quilt', 'raven', 'silly', 'tango', 'urban', 'vocal', 'witty', 'xerox', 'yummy',
-    'front', 'speed', 'motor', 'tower', 'taste', 'staff', 'stuff', 'scope', 'noise', 'joint'
+    'front', 'speed', 'motor', 'tower', 'taste', 'staff', 'stuff', 'scope', 'noise', 'joint',
+    'retry', 'amber', 'bliss', 'dodge', 'flair', 'gleam', 'hatch', 'image', 'joker', 'kebab',
+    'latch', 'merry', 'nurse', 'opera', 'pluck', 'quail', 'risky', 'sweep', 'trick', 'unite',
+    'vixen', 'whisk', 'young', 'zilch', 'blink', 'dwell', 'flask', 'gazer', 'aloof', 'brisk', 
+    'cliff', 'elope', 'gloss', 'hymns', 'irate', 'jumps', 'knead', 'lunar', 'mints', 'oaken',
+    'plush', 'quack', 'rival', 'swoop', 'truce', 'about', 'great', 'guess',
 ];

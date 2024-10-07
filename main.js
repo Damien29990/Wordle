@@ -4,8 +4,8 @@ const numberOfRound = 6;
 let roundRemaining = numberOfRound;
 let currentGuess = [];
 let nextLetter = 0;
-let answer = WORDS[Math.floor(Math.random() * WORDS.length)];
-console.log(answer);
+// let answer = WORDS[Math.floor(Math.random() * WORDS.length)];
+// console.log(answer);
 
 function initBoard() {
     let board = document.getElementById("attemptboard");
@@ -40,7 +40,8 @@ document.addEventListener("keyup", (e) => {
     }
 
     if (pressedKey === "Enter") {
-        checkanswer()
+        // checkanswer()
+        fetchguess()
         return
     }
 
@@ -82,6 +83,8 @@ function deleteLetter(){
     nextLetter -= 1
 }
 
+let guess = currentGuess.join("")
+
 function checkanswer(){
 
     let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
@@ -119,9 +122,53 @@ function checkanswer(){
         alert("You Win!!!")
         return
     }
+    else if (roundRemaining == 1) {
+        if (confirm("You Lose~~ \n YOu want to retry?")) {
+            resetgame()
+          } else {
+            return
+          }
+    } 
     else {
         roundRemaining -= 1;
         currentGuess = [];
         nextLetter = 0;    
     }
 };
+
+function resetgame(){
+    roundRemaining = numberOfRound;
+    currentGuess = [];
+    nextLetter = 0;    
+    answer = WORDS[Math.floor(Math.random() * WORDS.length)];
+    console.log(answer);
+}
+
+async function fetchguess(){
+
+    const response = await fetch('http://localhost:3002/guess', {
+    method: 'POST',
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin",
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ answer: currentGuess }),
+});
+
+const data = await response.json();
+console.log(data.message)
+
+if (data.valid) {
+    
+    roundRemaining -= 1;
+    currentGuess = [];
+    nextLetter = 0;    
+}
+
+else{
+    alert("Invalid guess")
+}
+
+}
