@@ -20,9 +20,6 @@ app.post('/guess', (req, res) => {
         console.log(result)
         res.json({ valid: true, message: "Valid guess", result })
     }
-    // console.log(guess.json())
-    // const score = calculateScore(guess, targetWord);
-    // res.json({ score });
 });
 
 let answer = WORDS[Math.floor(Math.random() * WORDS.length)];
@@ -65,7 +62,7 @@ function checkanswer(guess) {
 }
 
 // Start the server
-const port = 3002;
+const port = 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

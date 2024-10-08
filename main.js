@@ -136,6 +136,22 @@ function checkanswer(){
     }
 };
 
+function resultadjustment(resultarray){
+    let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
+
+    for(let i = 0; i <resultarray.length; i++){
+        let box = row.children[i]
+
+        if(resultarray[i] === "M"){
+            box.classList.add("missbox")
+        }
+        else if(resultarray[i] === "P"){
+            box.classList.add("presentbox")
+        }
+        else{box.classList.add("hitbox")}
+    }
+}
+
 function resetgame(){
     roundRemaining = numberOfRound;
     currentGuess = [];
@@ -146,7 +162,7 @@ function resetgame(){
 
 async function fetchguess(){
 
-    const response = await fetch('http://localhost:3002/guess', {
+    const response = await fetch('http://localhost:3000/guess', {
     method: 'POST',
     mode: "cors", // no-cors, *cors, same-origin
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -158,10 +174,10 @@ async function fetchguess(){
 });
 
 const data = await response.json();
-console.log(data.message)
+console.log(data.result)
 
 if (data.valid) {
-    
+    resultadjustment(data.result)
     roundRemaining -= 1;
     currentGuess = [];
     nextLetter = 0;    

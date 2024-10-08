@@ -87,7 +87,7 @@ function checkanswer(){
 
     let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
     let guess = currentGuess.join("")
-    console.log("This is Guess: ",guess)
+    // console.log("This is Guess: ",guess)
 
     if (currentGuess.length != 5){
         alert("Not enought letters")
@@ -100,35 +100,21 @@ function checkanswer(){
         return
     }
 
-    for (let i = 0; i< currentGuess.length; i++ ){
-        let templist = []
-        for(let j = 0; j < answer.length; j++){
-            let userinput =  currentGuess[i];
-            let word = answer[j];
-            console.log(userinput, word);
-            
-            if(word.includes(userinput)){
-                templist.push(word)
-                answer.splice(j, 1)
-            }
+    let bigcheckedarray = []
 
-            if(answer == []){
-                console.log("This is present")
-                answer = templist
-            }
-        }
-
-    //    let user =  currentGuess[i];
-    //    let server = answer[i];
-    //    let box = row.children[i]
-
-    //    if (answer.includes(user)){
-    //     if (user === server){
-    //         box.classList.add("hitbox")
-    //     }
-    //     else{ box.classList.add("presentbox")}
-    //    }
-    //    else{ box.classList.add("missbox")}
+    for (let i = 0; i < answer.length; i++){
+        bigcheckedarray.push(resultcheck(currentGuess,answer[i]))
+        // console.log(bigcheckedarray)
+    }
+    console.log(checkallM(bigcheckedarray))
+    
+    if (checkallM(bigcheckedarray)){
+        answer = shortlist(bigcheckedarray,answer)
+        console.log("This is shortlisted answr: ",answer)
+    }
+    else{
+        answer = selectcandidate(bigcheckedarray,answer)
+        console.log("This selected candidate: ", answer)
     }
 
     if (guess === answer) {
@@ -147,4 +133,59 @@ function checkanswer(){
         currentGuess = [];
         nextLetter = 0;    
     }
+
 };
+
+function resultcheck (userword,serverword){
+    let checkedarray = [];
+
+    for (let i = 0; i< serverword.length; i++ ){
+        let user =  userword[i];
+        let server = serverword[i];
+ 
+        console.log(user, server);
+ 
+        if (serverword.includes(user)){
+         if (user === server){
+             checkedarray.push('H')
+         }
+         else{ checkedarray.push('P')}
+        }
+        else{ checkedarray.push('M')}
+     }
+    return checkedarray;
+}
+
+function checkallM(array) {
+    return array.some(subArray => 
+      subArray.length === 5 && 
+      subArray.every(value => value === 'M')
+    );
+  }
+
+function shortlist(resultArray, wordArray) {
+    for (let i = resultArray.length - 1; i >= 0; i--) {
+        if (!resultArray[i].every(value => value === 'M')) {
+            wordArray.splice(i, 1);
+        }
+    }
+    return wordArray;
+}
+
+function selectcandidate(resultarray, wordarray) {
+    let tempanswer = ''
+    let min = Infinity;
+    for (let i = 0; i < resultarray.length; i++){
+        const countH = resultarray[i].filter(element => element === 'H').length;
+        const countP = resultarray[i].filter(element => element === 'P').length;
+        let count = countH*3 + countP*1
+        console.log(count)
+        if(count < min){
+            min = count
+            tempanswer = wordarray[i]
+        }
+
+    }
+    
+    return tempanswer
+}
