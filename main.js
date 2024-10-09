@@ -1,12 +1,8 @@
-import { WORDS } from "./word.js";
-
 const numberOfRound = 6;
 let roundRemaining = numberOfRound;
 let currentGuess = [];
 let nextLetter = 0;
-// let answer = WORDS[Math.floor(Math.random() * WORDS.length)];
-// console.log(answer);
-
+const url = "http://localhost:3003"
 function initBoard() {
     let board = document.getElementById("attemptboard");
 
@@ -40,7 +36,6 @@ document.addEventListener("keyup", (e) => {
     }
 
     if (pressedKey === "Enter") {
-        // checkanswer()
         fetchguess()
         return
     }
@@ -61,7 +56,7 @@ function insertLetter (pressedKey) {
 
     let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
     let box = row.children[nextLetter]
-    box.textContent = pressedKey
+    box.textContent = pressedKey.toUpperCase()
     box.classList.add("filled-box")
     currentGuess.push(pressedKey)
     nextLetter += 1
@@ -85,56 +80,6 @@ function deleteLetter(){
 
 let guess = currentGuess.join("")
 
-function checkanswer(){
-
-    let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
-    let guess = currentGuess.join("")
-    console.log("This is Guess: ",guess)
-
-    if (currentGuess.length != 5){
-        alert("Not enought letters")
-        return
-    }
-
-
-    if (!WORDS.includes(guess)){
-        alert("The word not include in the list or not a word")
-        return
-    }
-
-    for (let i = 0; i< answer.length; i++ ){
-       let user =  currentGuess[i];
-       let server = answer[i];
-       let box = row.children[i]
-
-       console.log(user, server);
-
-       if (answer.includes(user)){
-        if (user === server){
-            box.classList.add("hitbox")
-        }
-        else{ box.classList.add("presentbox")}
-       }
-       else{ box.classList.add("missbox")}
-    }
-
-    if (guess === answer) {
-        alert("You Win!!!")
-        return
-    }
-    else if (roundRemaining == 1) {
-        if (confirm("You Lose~~ \n YOu want to retry?")) {
-            resetgame()
-          } else {
-            return
-          }
-    } 
-    else {
-        roundRemaining -= 1;
-        currentGuess = [];
-        nextLetter = 0;    
-    }
-};
 
 function resultadjustment(resultarray){
     let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
@@ -150,19 +95,49 @@ function resultadjustment(resultarray){
         }
         else{box.classList.add("hitbox")}
     }
+
+    
 }
 
-function resetgame(){
+ function resetgame(){
     roundRemaining = numberOfRound;
     currentGuess = [];
     nextLetter = 0;    
-    answer = WORDS[Math.floor(Math.random() * WORDS.length)];
-    console.log(answer);
+    deleteBoard()
+    initBoard()
+
+    fetch(url + "/reset", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            action: 'reset'
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Reset request sent successfully');
+        } else {
+            console.error('Failed to send reset request');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function deleteBoard(){
+    let board = document.getElementById("attemptboard");
+
+    while(board.firstChild){
+        board.removeChild(board.firstChild)
+    }
 }
 
 async function fetchguess(){
 
-    const response = await fetch('http://localhost:3000/guess', {
+    const response = await fetch(url + '/guess', {
     method: 'POST',
     mode: "cors", // no-cors, *cors, same-origin
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -173,14 +148,29 @@ async function fetchguess(){
     body: JSON.stringify({ answer: currentGuess }),
 });
 
+
 const data = await response.json();
 console.log(data.result)
 
 if (data.valid) {
     resultadjustment(data.result)
-    roundRemaining -= 1;
-    currentGuess = [];
-    nextLetter = 0;    
+
+    if (data.result.every(value => value === 'H')) {
+        alert("You Win!!!")
+        return
+    }
+    else if (roundRemaining == 1) {
+        if (confirm("You Lose~~ \n YOu want to retry?")) {
+            resetgame()
+          } else {
+            return
+          }
+    } 
+    else {
+        roundRemaining -= 1;
+        currentGuess = [];
+        nextLetter = 0;    
+    }
 }
 
 else{

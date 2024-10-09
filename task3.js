@@ -5,6 +5,7 @@ let roundRemaining = numberOfRound;
 let currentGuess = [];
 let nextLetter = 0;
 let answer = WORDS;
+let wordlist = [...WORDS];
 console.log(answer);
 
 function initBoard() {
@@ -41,7 +42,7 @@ document.addEventListener("keyup", (e) => {
 
     if (pressedKey === "Enter") {
         checkanswer()
-        // fetchguess()
+        console.log("This is WORD: ",wordlist)
         return
     }
 
@@ -87,7 +88,6 @@ function checkanswer(){
 
     let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
     let guess = currentGuess.join("")
-    // console.log("This is Guess: ",guess)
 
     if (currentGuess.length != 5){
         alert("Not enought letters")
@@ -95,7 +95,7 @@ function checkanswer(){
     }
 
 
-    if (!WORDS.includes(guess)){
+    if (!wordlist.includes(guess)){
         alert("The word not include in the list or not a word")
         return
     }
@@ -106,15 +106,19 @@ function checkanswer(){
         bigcheckedarray.push(resultcheck(currentGuess,answer[i]))
         // console.log(bigcheckedarray)
     }
-    console.log(checkallM(bigcheckedarray))
+    // console.log(checkallM(bigcheckedarray))
     
     if (checkallM(bigcheckedarray)){
         answer = shortlist(bigcheckedarray,answer)
         console.log("This is shortlisted answr: ",answer)
+        resultdisplay(currentGuess,answer[0])
+
     }
     else{
         answer = selectcandidate(bigcheckedarray,answer)
+        resultdisplay(currentGuess,answer)
         console.log("This selected candidate: ", answer)
+
     }
 
     if (guess === answer) {
@@ -122,7 +126,7 @@ function checkanswer(){
         return
     }
     else if (roundRemaining == 1) {
-        if (confirm("You Lose~~ \n YOu want to retry?")) {
+        if (confirm(`You Lose~~  \n The answer is ${answer} \n You want to retry?`)) {
             resetgame()
           } else {
             return
@@ -143,7 +147,7 @@ function resultcheck (userword,serverword){
         let user =  userword[i];
         let server = serverword[i];
  
-        console.log(user, server);
+        // console.log(user, server);
  
         if (serverword.includes(user)){
          if (user === server){
@@ -175,6 +179,10 @@ function shortlist(resultArray, wordArray) {
 function selectcandidate(resultarray, wordarray) {
     let tempanswer = ''
     let min = Infinity;
+    if(typeof wordarray === 'string'){
+        return wordarray
+    }
+
     for (let i = 0; i < resultarray.length; i++){
         const countH = resultarray[i].filter(element => element === 'H').length;
         const countP = resultarray[i].filter(element => element === 'P').length;
@@ -188,4 +196,22 @@ function selectcandidate(resultarray, wordarray) {
     }
     
     return tempanswer
+}
+
+function resultdisplay(userword,serverword){
+    let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
+
+    for (let i = 0; i< serverword.length; i++ ){
+        let user =  userword[i];
+        let server = serverword[i];
+        let box = row.children[i]
+ 
+        if (serverword.includes(user)){
+         if (user === server){
+             box.classList.add("hitbox")
+         }
+         else{ box.classList.add("presentbox")}
+        }
+        else{ box.classList.add("missbox")}
+     }
 }

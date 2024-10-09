@@ -8,7 +8,7 @@ export const WORDS = [
     'banan', 'cocon', 'leave', 'child', 'tomat', 'teeth', 'rocks', 'drive', 'judge', 'field',
     'adore', 'beach', 'candy', 'daisy', 'eager', 'fancy', 'giant', 'honey', 'irony', 'jumpy',
     'karma', 'lucky', 'mango', 'noble', 'olive', 'piano', 'queen', 'robot', 'sugar', 'toast',
-    'ultra', 'vivid', 'whale', 'xenon', 'yacht', 'zesty', 'bacon', 'chess', 'doubt', 'eagle',
+    'ultra', 'human', 'whale', 'xenon', 'yacht', 'zesty', 'bacon', 'chess', 'doubt', 'eagle',
     'fable', 'globe', 'house', 'input', 'jolly', 'kiosk', 'lemon', 'mirth', 'ninja', 'oasis',
     'penny', 'quilt', 'raven', 'silly', 'tango', 'urban', 'vocal', 'witty', 'xerox', 'yummy',
     'front', 'speed', 'motor', 'tower', 'taste', 'staff', 'stuff', 'scope', 'noise', 'joint',
@@ -16,5 +16,9 @@ export const WORDS = [
     'latch', 'merry', 'nurse', 'opera', 'pluck', 'quail', 'risky', 'sweep', 'trick', 'unite',
     'vixen', 'whisk', 'young', 'zilch', 'blink', 'dwell', 'flask', 'gazer', 'aloof', 'brisk', 
     'cliff', 'elope', 'gloss', 'hymns', 'irate', 'jumps', 'knead', 'lunar', 'mints', 'oaken',
-    'plush', 'quack', 'rival', 'swoop', 'truce', 'about', 'great', 'guess',
-];
+    'plush', 'quack', 'rival', 'swoop', 'truce', 'about', 'great', 'guess', 'alone', 'guest',
+    'horse', 'valid', 'ravel', 'buggy', 'short', 'eater', 'baker', 'cards', 'worth', 'world',
+    'auxin', 'clamp', 'coach', 'bless', 'messy', 'wheel', 'views', 'bones', 'cheap', 'cheer',
+    'stand', 'funny', 'sleep', 'crabs', 'atoms', 'bombs', 'paper', 'money', 'fight', 'fishy',
+    'among', 'usage'
+]; 

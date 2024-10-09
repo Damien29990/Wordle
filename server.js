@@ -4,6 +4,10 @@ import express from 'express';
 import cors from 'cors';
 const app = express();
 
+let wordlist = [...WORDS]
+let answer = wordlist[Math.floor(Math.random() * WORDS.length)];
+console.log(answer);
+
 app.use(cors());
 app.use(express.json());
 
@@ -22,8 +26,13 @@ app.post('/guess', (req, res) => {
     }
 });
 
-let answer = WORDS[Math.floor(Math.random() * WORDS.length)];
-console.log(answer);
+app.post('/reset', (req, res) => {
+        answer = wordlist[Math.floor(Math.random() * WORDS.length)];
+        res.status(200).send('Reset successful');
+    
+})
+
+
 
 function isValidGuess(guess) {
     guess = guess.join("")
@@ -38,7 +47,6 @@ function isValidGuess(guess) {
     }
 
     else{ return true; }
-    // return /^[a-zA-Z]{5}$/.test(guess);
 }
 
 function checkanswer(guess) {
@@ -62,7 +70,7 @@ function checkanswer(guess) {
 }
 
 // Start the server
-const port = 3000;
+const port = 3003;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
