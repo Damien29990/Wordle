@@ -36,7 +36,7 @@ Player who first guess the answer correctly will win the game or who score highe
 - hit = 3 points * (7 - current round)
 - present = 1 point * (7 - current round)
 #Example: 2 hits & 1 present in round 2
--Total score = 2*3*5 + 1*5 = 35 points
+-Total score = 2 * 3 * 5 + 1*5 = 35 points
 
 #limitation
 - words only allowed in the configured wordlist
