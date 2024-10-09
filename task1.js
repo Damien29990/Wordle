@@ -6,6 +6,7 @@ let answer = '' // answer from server
 
 const url = "http://localhost:3005"
 
+
 // Generate the game board
 function initBoard() {
     let board = document.getElementById("attemptboard");
