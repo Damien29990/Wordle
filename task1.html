@@ -7,22 +7,15 @@
     <link rel="stylesheet" href="main.css" />
 </head>
 <body>
-    <h1>Multi-player wordle</h1>
+    <h1>Wordle Game</h1>
+
     <div class="menu">    
-        <a href="main.html">Back</a> <!-- Back to main menu -->
+        <a href="main.html">Back</a><!-- Back to main menu -->
     </div>
-    <div class="scoreboard"> <!-- Indicate the players score and the turn -->
-        <div id="scoreA"></div>
-        <div id="playerturn"></div>
-        <div id="scoreB"></div>
-    </div>
-    
     <!-- Empty div for generate game board -->
-    <div class="attemptboard_main" id="attemptboard_mainA">
-    </div>
-    <!-- Second Empty div for generate game board and not showing even it generated-->
-    <div class="attemptboard_main deactivate" id="attemptboard_mainB">
-    </div>
+    <div id="attemptboard">
+
+</div>
 
 <div class="keyboard">
     <div class="keyrow">
@@ -51,7 +44,7 @@
     </div>    
 
     <div class="keyrow">
-        <div class="key">Enter</div>
+        <div class="key" id="enter">Enter</div>
         <div class="key">Z</div>
         <div class="key">X</div>
         <div class="key">C</div>
@@ -64,7 +57,7 @@
 
 </div>
 
-<script src="./task4.js" type="module"></script>
+<script src="./task1.js" type="module"></script>
 
 </body>
 </html>

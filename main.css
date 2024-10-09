@@ -1,5 +1,66 @@
-h1 {
+body {
     text-align: center;
+    align-items: center;
+
+}
+
+/* Main menu Css */
+.descibe{
+    margin: 40px 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.gm-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    text-align: center;
+    align-items: center;
+
+    margin: 5rem;
+}
+
+.gm-btn {
+    background-color: #f7f5e3;
+    height: 8vh;
+    width: 20vw;
+
+    border-radius: 5px;
+    border:3px black;
+    border-style: solid;    
+    margin: 5px 5px;
+    padding: 20px;
+
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none black;
+
+    cursor: pointer;
+}
+
+.gm-btn:hover{
+    border-color: blue;
+    transform: scale(1.2);
+}
+
+/* All wordle general css */
+.menu {
+
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    padding: 10px;
+    
+    border-style: 3px solid black;
+    border-radius: 0.25rem;
+}
+
+.menu a{    
+    text-decoration: none black;
+    color: black;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .wordblock {
@@ -104,6 +165,7 @@ h1 {
     background-color: #8d9aa1;
 }
 
+/* Animation */
 @keyframes rotation{
     from{
         transform: rotateY(0deg);
@@ -111,4 +173,38 @@ h1 {
     to{
         transform: rotateY(359deg);
     }
+}
+
+
+/* Task 4 Css */
+.scoreboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 10vw;
+}
+
+.attemptboard_main {
+    margin: 20px;
+    justify-content: center;
+    display: block;
+    flex-direction: column;
+}
+
+.attemptboard_sub{
+    margin: 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 8rem;
+    top: 8rem;
+    /* background-color: red; */
+    height: 45vh;
+    width: 20vw;
+    /* color: red; */
+}
+
+.deactivate{
+    display: none !important;
 }

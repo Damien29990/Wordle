@@ -1,13 +1,14 @@
 import { WORDS } from "./word.js";
 
 const numberOfRound = 6;
-let roundRemaining = numberOfRound;
-let currentGuess = [];
-let nextLetter = 0;
+let roundRemaining = numberOfRound; // Count remain round
+let currentGuess = []; // Temporary input array
+let nextLetter = 0; //Count number of next key input
 let answer = WORDS;
-let wordlist = [...WORDS];
-console.log(answer);
+let wordlist = [...WORDS]; // A copy of full list
+// console.log(answer);
 
+// Generate the game board
 function initBoard() {
     let board = document.getElementById("attemptboard");
 
@@ -27,14 +28,15 @@ function initBoard() {
 
 initBoard()
 
+// Operate a eventlistener for any keyboard movement for input
 document.addEventListener("keyup", (e) => {
-
+    // No round leave stop
     if (roundRemaining === 0) {
         return
     }
 
     let pressedKey = String(e.key)
-    console.log(pressedKey)
+    // console.log(pressedKey)
     if (pressedKey === "Backspace" && nextLetter !== 0) {
         deleteLetter()
         return
@@ -42,10 +44,10 @@ document.addEventListener("keyup", (e) => {
 
     if (pressedKey === "Enter") {
         checkanswer()
-        console.log("This is WORD: ",wordlist)
+        // console.log("This is WORD: ",wordlist)
         return
     }
-
+    // Prevent other key input
     let found = pressedKey.match(/[a-z]/gi)
     if (!found || found.length > 1) {
         return
@@ -54,6 +56,7 @@ document.addEventListener("keyup", (e) => {
     }
 })
 
+// Display the letter to the word block
 function insertLetter (pressedKey) {
     if (nextLetter === 5) {
         return
@@ -67,10 +70,11 @@ function insertLetter (pressedKey) {
     currentGuess.push(pressedKey)
     nextLetter += 1
 
-    console.log(currentGuess)
+    // console.log(currentGuess)
 
 }
 
+// Delete the letter in the word block
 function deleteLetter(){
     if (nextLetter === 0){
         return
@@ -84,40 +88,47 @@ function deleteLetter(){
     nextLetter -= 1
 }
 
+//Start the flow of check answer
 function checkanswer(){
 
     let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
     let guess = currentGuess.join("")
 
+    //Return input not enough letters
     if (currentGuess.length != 5){
         alert("Not enought letters")
         return
     }
 
-
+    //Return input not in the word list
     if (!wordlist.includes(guess)){
         alert("The word not include in the list or not a word")
         return
     }
 
-    let bigcheckedarray = []
+    let bigcheckedarray = [] //Set up a 2 dimension array
 
     for (let i = 0; i < answer.length; i++){
         bigcheckedarray.push(resultcheck(currentGuess,answer[i]))
-        // console.log(bigcheckedarray)
+        //Get all result comparing the input and word list
     }
     // console.log(checkallM(bigcheckedarray))
     
     if (checkallM(bigcheckedarray)){
         answer = shortlist(bigcheckedarray,answer)
-        console.log("This is shortlisted answr: ",answer)
+        // console.log("This is shortlisted answr: ",answer)
         resultdisplay(currentGuess,answer[0])
-
+    // If there a word not hit or present any alphabet by input (All miss)
+    // Return one of result from the shortlisted list (All miss)
     }
     else{
         answer = selectcandidate(bigcheckedarray,answer)
         resultdisplay(currentGuess,answer)
-        console.log("This selected candidate: ", answer)
+        // console.log("This selected candidate: ", answer)
+    
+    // If there all word have alphabet hit or present by input 
+    // Find out the lowest score candidate
+    // Return the result of selected candidate
 
     }
 
@@ -140,6 +151,7 @@ function checkanswer(){
 
 };
 
+// Check the result between guess and wordlist 
 function resultcheck (userword,serverword){
     let checkedarray = [];
 
@@ -157,9 +169,10 @@ function resultcheck (userword,serverword){
         }
         else{ checkedarray.push('M')}
      }
-    return checkedarray;
+    return checkedarray; // return a result array
 }
 
+// Check the a big array contain an array with five miss
 function checkallM(array) {
     return array.some(subArray => 
       subArray.length === 5 && 
@@ -167,18 +180,20 @@ function checkallM(array) {
     );
   }
 
+// shortlist the big array, remain the words never hit or present any aplhabet
 function shortlist(resultArray, wordArray) {
     for (let i = resultArray.length - 1; i >= 0; i--) {
         if (!resultArray[i].every(value => value === 'M')) {
             wordArray.splice(i, 1);
         }
     }
-    return wordArray;
+    return wordArray; 
 }
 
+// Compare all candidate and select the lowest score
 function selectcandidate(resultarray, wordarray) {
     let tempanswer = ''
-    let min = Infinity;
+    let min = Infinity; // Set infinity allow the first result must be minimum
     if(typeof wordarray === 'string'){
         return wordarray
     }
@@ -186,18 +201,18 @@ function selectcandidate(resultarray, wordarray) {
     for (let i = 0; i < resultarray.length; i++){
         const countH = resultarray[i].filter(element => element === 'H').length;
         const countP = resultarray[i].filter(element => element === 'P').length;
-        let count = countH*3 + countP*1
-        console.log(count)
+        let count = countH*3 + countP*1 // Every hit get 3 points, Every present get 1 point
         if(count < min){
             min = count
-            tempanswer = wordarray[i]
+            tempanswer = wordarray[i] // save the temporary candidate
         }
 
     }
     
-    return tempanswer
+    return tempanswer //return the lowest sroce candidate
 }
 
+// Display the result with colors
 function resultdisplay(userword,serverword){
     let row = document.getElementsByClassName("attemptblock")[6 - roundRemaining]
 

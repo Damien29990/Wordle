@@ -1,3 +1,4 @@
+// This is the initial word list
 export const WORDS = [
     'years', 'apple', 'brave', 'charm', 'dance', 'eagle', 'frost', 'grape', 'happy', 'jelly',
     'ivory', 'knife', 'lemon', 'magic', 'night', 'ocean', 'peach', 'quiet', 'river', 'shine',
@@ -20,5 +21,21 @@ export const WORDS = [
     'horse', 'valid', 'ravel', 'buggy', 'short', 'eater', 'baker', 'cards', 'worth', 'world',
     'auxin', 'clamp', 'coach', 'bless', 'messy', 'wheel', 'views', 'bones', 'cheap', 'cheer',
     'stand', 'funny', 'sleep', 'crabs', 'atoms', 'bombs', 'paper', 'money', 'fight', 'fishy',
-    'among', 'usage'
+    'among', 'usage', 'grass', 'glass', 'score', 'theft', 'grams', 'never', 'lamps', 'lobby',
+    'hobby', 'crops', 'loops', 'scrub', 'boron', 'major', 'layer', 'floor', 'color', 'phone',
+    'smart', 'angle', 'pupil', 'expel', 'hosts', 'japan', 'quark', 'sweet', 'sweat', 'build',
+    'bread', 'proud', 'inert', 'nerdy', 'nerds', 'first', 'books', 'cooks', 'doors', 'nerve',
+    'fibre', 'issue', 'admit', 'korea', 'turns', 'mouse', 'veins', 'climb', 'sigma', 'delta',
+    'alpha', 'bravo', 'cloud', 'stars', 'cheat', 'words', 'costs', 'lipid', 'alkyl', 'group',
+    'petty', 'sorry', 'visit', 'carry', 'faint', 'fatal', 'falls', 'fails', 'boxes', 'ovary',
+    'films', 'marry', 'cause', 'force', 'bulbs', 'urine', 'ducts', 'ducks', 'sucks', 'mount',
+    'deers', 'slave', 'array', 'count', 'sword', 'rifle', 'class', 'china', 'lands', 'trend',
+    'joint', 'spins', 'yours', 'canal', 'graph', 'craft', 'woman', 'women', 'hands', 'heads',
+    'yield', 'shoot', 'stems', 'steam', 'cream', 'under', 'reach', 'usual', 'enter', 'month',
+    'grave', 'habit', 'break', 'broke', 'calls', 'green', 'black', 'white', 'gifts', 'sheep',
+    'cycle', 'vases', 'xylem', 'stock', 'scary', 'think', 'alter', 'drugs', 'piece', 'place',
+    'peace', 'every', 'reset', 'label', 'alert', 'final', 'level', 'bring', 'liver', 'miner',
+    'print', 'space', 'rooms', 'limbs', 'slein', 'demon', 'cater', 'crate', 'tense', 'fully',
+    'while', 'utter', 'waves', 'story', 'faces', 'feast', 'fence', 'faece', 'wings', 'reply',
+    'polar', 'moles', 'point', 'cloth'
 ]; 
